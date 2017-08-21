@@ -3,13 +3,13 @@
   <v-header></v-header>
    <div class="tab">
       <div class="tab-item">
-        <a v-link='{path:"/goods"}'>商品</a>
+        <a v-link='{path:"/goods"}'>商品1</a>
       </div>
       <div class="tab-item">
-         <a v-link='{path:"/ratings"}'>评论</a>
+         <a v-link='{path:"/ratings"}'>评论1</a>
       </div>
       <div class="tab-item">
-         <a v-link='{path:"/seller"}'>商家</a>
+         <a v-link='{path:"/seller"}'>商家1</a>
       </div>
 
    </div>
