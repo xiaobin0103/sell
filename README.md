@@ -1,4 +1,4 @@
-# sell
+# Vue-music
 
 > A Vue.js project
 

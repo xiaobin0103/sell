@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="head">
     我是评论
     </div> 
 
