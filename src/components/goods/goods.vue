@@ -48,7 +48,7 @@
     
     </div>
     <!-- 购物车组件 传递配送费 起送价-->
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart> 
+    <shopcart v-ref:shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart> 
   </div>
 
 </template>
@@ -84,6 +84,20 @@
           }
         }
         return 0;
+      },
+      selectFoods(){
+        let foods=[]
+        this.goods.forEach((good)=>{
+          good.foods.forEach((food)=>{
+            if (food.count) {
+              foods.push(food)
+
+              
+            }
+          })
+
+        })
+        return foods
       }
     },
     created() {
@@ -144,13 +158,23 @@
        
 
         
+      },
+      // 小球动画
+      _drop(target){
+          this.$refs.shopcart.drop(target)
       }
     },
     //注册组件
     components: {
       shopcart,
       cartconcontrol
-    } 
+    }, 
+    // 接收事件
+    events: {
+      "cart.add"(target){
+          this._drop(target)
+      }
+    }
 
   }
 </script>
