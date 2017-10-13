@@ -17,7 +17,8 @@
         <li v-for="item in goods" class="food-list food-list-hook">
           <h1 class="title">{{item.name}}</h1>
           <ul>
-            <li v-for="food in item.foods" class="food-item">
+            <!-- 点击商品进入详情 -->
+            <li @click="selectFood(food,$event)" v-for="food in item.foods" class="food-item">
               <div class="icon">
                 <img width="57" height="57" :src="food.icon" alt="">
               </div>
@@ -49,6 +50,8 @@
     </div>
     <!-- 购物车组件 传递配送费 起送价-->
     <shopcart v-ref:shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart> 
+    <!-- 商品详情组件 -->
+    <food :food="selectedFood"></food>
   </div>
 
 </template>
@@ -59,6 +62,8 @@
   import shopcart from "components/shopcart/shopcart" 
   //引入购物按钮组件 
   import cartconcontrol from "components/cartconcontrol/cartconcontrol"
+  // 商品详情组件
+  import food from "components/food/food"
   const ERR_OK = 0
   export default{
     props: {
@@ -70,7 +75,8 @@
       return {
         goods: [],
         listHeight:[],
-        scrollY:0
+        scrollY:0,
+        selectedFood:{}
       }
     },
     computed: {
@@ -117,6 +123,13 @@
     },
     //初始化BSscroll
     methods:{
+      // 商品详情
+      selectFood(food,event){
+          if(!event._constructed){
+          return
+        } 
+        this.selectedFood = food
+      },
       //点击选择 
       selectMenu(index,event){      
         //如果是原生事件 阻止 
@@ -167,7 +180,8 @@
     //注册组件
     components: {
       shopcart,
-      cartconcontrol
+      cartconcontrol,
+      food
     }, 
     // 接收事件
     events: {
