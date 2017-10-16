@@ -51,7 +51,7 @@
     <!-- 购物车组件 传递配送费 起送价-->
     <shopcart v-ref:shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart> 
     <!-- 商品详情组件 -->
-    <food :food="selectedFood"></food>
+    <food :food="selectedFood" v-ref:food transition="move"></food>
   </div>
 
 </template>
@@ -129,6 +129,7 @@
           return
         } 
         this.selectedFood = food
+        this.$refs.food.show()
       },
       //点击选择 
       selectMenu(index,event){      

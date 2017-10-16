@@ -29,9 +29,13 @@
                
                 if(!this.food.count){
                     Vue.set(this.food,"count",1)
+                    event.cancelBubble = true
+                    
                     
                 }else{
                     this.food.count++
+                    event.cancelBubble = true
+                    
                 }
                 // 派发事件
                 this.$dispatch("cart.add",event.target)
@@ -42,6 +46,7 @@
                 }
                 if (this.food.count) {
                     this.food.count--
+                    event.cancelBubble = true
                     
                 } 
 
