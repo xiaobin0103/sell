@@ -18,7 +18,6 @@ const POSITIVE = 0
 const NEGATIVE = 1
 // 所有评价
 const ALL = 2
-const a=1
 
 
 
