@@ -1,11 +1,11 @@
 <template>
   <div class="ratingselect">
       <div class="rating-type">
-          <span class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">12</span></span>
-          <span class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">12</span></span>
-          <span class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">13</span></span>
+          <span  @click="select(2,$event)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span>
+          <span  @click="select(0,$event)" class="block positive" :class="{'active':selectType===0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
+          <span  @click="select(1,$event)" class="block negative" :class="{'active':selectType===1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
       </div>
-      <div class="switch" :class="{'on':onlyContent}">
+      <div @click="toggleContent" class="switch" :class="{'on':onlyContent}">
           <span class="icon-check_circle" ></span>
           <span class="text">只看有内容的评价</span>
       </div>
@@ -18,9 +18,6 @@ const POSITIVE = 0
 const NEGATIVE = 1
 // 所有评价
 const ALL = 2
-
-
-
 export default {
   props: {
       ratings:{
@@ -49,9 +46,34 @@ export default {
           }
       }
   },
+  computed:{
+      positives(){
+          return this.ratings.filter((rating)=>{
+              return rating.rateType===POSITIVE
+
+          })
+      },
+      negatives(){
+          return this.ratings.filter((rating)=>{
+              return rating.rateType===NEGATIVE
+
+          })
+      }
+  },
+  methods: {
+      select(type,event){
+          this.selectType=type
+          this.$dispatch('ratingtype.select',type)
+      },
+      toggleContent(){
+          this.onlyContent=! this.onlyContent
+          this.$dispatch('content.toggle',this.onlyContent)
+      }
+
+  },
   
   created () {
-      console.log(this.onlyContent)
+    //   console.log(this.onlyContent)
       
   }
       
